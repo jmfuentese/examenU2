@@ -62,6 +62,7 @@
     //se inicializan los select de materialize
     $(document).ready(function(){
         $('select').formSelect();
+        $('.materialboxed').materialbox();
     });
 
     //se inicializan los datepicker
@@ -71,6 +72,12 @@
             format:'yyyy-mm-dd'
         });
     });
+
+    //se inicializa la galeria de imagenes del dashboard
+    $(document).ready(function(){
+
+    });
+
     //se inicializa el campo de folio con contador de caracteres
     $('input#input_text, textarea#textarea2').characterCounter();
 </script>
@@ -80,9 +87,17 @@
         $("#grupoSelect").change(function(){
             $("#grupoSelect option:selected").each(function(){
                 grupo = $(this).val();
+                //se obtiene el elemento html SELECT de alumnas en una variable para reutilizarse y
+                // evitar selectores duplicados de jQuery
+                alumnasSelect = $("#alumnaSelect");
                 //se envia el parametro grupo mediante el metodo post al script php fetchAlumnas
-                $.post("models/fetchAlumnas.php", {grupo : grupo}, function (data) {
-                    $("#alumnaSelect").html(data);
+                $.get( "models/fetchAlumnas.php?grupo=" + grupo, function( data ) {
+                    //Se reemplaza la estructura html del SELECT de alumnas con la estructura obtenida
+                    //con la llamada asincrona al script fetchAlumnas.php
+                    alumnasSelect.html(data);
+                    //Se reinicializa el SELECT que contiene el listado de alumnas
+                    alumnasSelect.formSelect();
+                    //console.log( data);
                 });
             });
         });
