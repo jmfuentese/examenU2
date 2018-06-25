@@ -1,4 +1,5 @@
 <?php
+    //Se inicia la sesion en la pagina
     session_start();
 
 ?>
@@ -35,9 +36,8 @@
 
 <div class="wrapper">
 
-
-
         <?php
+        //En este script se obtiene la barra de navegacion y las vistas segun se indiquen mediante el controlador getLinks
         include "views/modules/navbar.php";
         $mvc = new Controller();
         $mvc -> getLinks();
@@ -59,24 +59,28 @@
 <!-- datepicker -->
 <script src="views/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
+    //se inicializan los select de materialize
     $(document).ready(function(){
         $('select').formSelect();
     });
 
+    //se inicializan los datepicker
     $(document).ready(function(){
         $('.datepicker').datepicker({
+            //se establece el formato en el que se desea imprimir la fecha
             format:'yyyy-mm-dd'
         });
     });
-
+    //se inicializa el campo de folio con contador de caracteres
     $('input#input_text, textarea#textarea2').characterCounter();
 </script>
 <script>
     $(document).ready(function(){
-        $("#grupoSelect").on('change', function(){
+        //funcion para el filtrado de alumnas segun el grupo seleccionado (NO FUNCIONA POR AHORA)
+        $("#grupoSelect").change(function(){
             $("#grupoSelect option:selected").each(function(){
                 grupo = $(this).val();
-                
+                //se envia el parametro grupo mediante el metodo post al script php fetchAlumnas
                 $.post("models/fetchAlumnas.php", {grupo : grupo}, function (data) {
                     $("#alumnaSelect").html(data);
                 });
@@ -85,19 +89,24 @@
     });
 </script>
 <script>
+    //se inicializan las tablas dinamicas
     $(function () {
         $("#inventario").DataTable({
             dom: 'Bfrtip',
+            //se asignan los botones para imprimir contenido de las tablas
             buttons: [
                 'csv', 'excel', 'pdf', 'print'
             ]
         });
+        //se inicializan las tablas dinamicas
         $("#example1").DataTable({
             dom: 'Bfrtip',
             buttons: [
+                //se asignan los botones para imprimir contenido de las tablas
                 'csv', 'excel', 'pdf', 'print'
             ]
         });
+        //se inicializan las tablas dinamicas
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,

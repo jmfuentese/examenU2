@@ -1,4 +1,5 @@
 <?php
+    //Se crea una instancia nueva de la clase Controller para la vista de registro
     $vistaRegistro = new Controller();
  ?>
 <div class="content" style="width:35%; margin:50px auto;">
@@ -11,6 +12,7 @@
             <select name="grupo" id="grupoSelect" required>
                 <option value="" disabled>Seleccionar grupo</option>
                 <?php
+                    //se invoca el controlador para el listado de grupos
                     $vistaRegistro->gruposListController();
                  ?>
             </select>
@@ -19,6 +21,7 @@
             <select name="alumna" id="alumnaSelect">
                 <option value="" disabled>Seleccionar alumna</option>
                 <?php
+                    //se invoca el controlador para el listado de alumnas
                     $vistaRegistro->alumnasListController();
                  ?>
             </select>
@@ -63,6 +66,7 @@
       
     </form>
     <?php
+        //se invoca el controlador para el registro de pagos
         $vistaRegistro->registroPagoController();
     ?>
 </div>
